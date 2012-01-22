@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tabs Test</title>
+        <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="static/css/1140.css" />
+        <link rel="stylesheet" type="text/css" href="static/css/qunit.css" />
+        <script type="text/javascript" src="static/js/jquery.js"></script>
+        <script type="text/javascript" src="static/js/jquery.billTabs.js"></script>
+        
+        <script type="text/javascript" src="static/js/jquery.qunit.js"></script>
+        <script type="text/javascript" src="static/js/jquery.testBillTabs.js"></script>
+        
+        <script type="text/javascript">        
+        	$(document).ready(function() {
+        		window.data = {};
+        		window.data.billTabsManager = new BillTabsManager($('#billTabs'));
+        		window.data.billTabsManager.onTabsChanged(function(oldTab, newTab) {
+        			console.log('tab change event called');
+        			console.log('oldTab',oldTab);
+        			console.log('newTab',newTab);
+        		});
+        		
+        		$('#clickToGoToSlide3').click(function() {
+        			window.data.billTabsManager.tabs[2].select();
+        		});
+        		
+        		testBillTabs();
+        	});        
+        </script>
+        
+    </head>
+    <body>
+        <div id="main" class="container">
+        	<ul id="billTabs" class="row">
+        		<li billTab="tab1"><a href="#">Tab 1</a></li>
+        		<li billTab="tab2" class="selected"><a href="#">Tab 2</a></li>
+        		<li billTab="tab3"><a href="#">Tab 3</a></li>
+        	</ul> <!-- #billTabs .row -->
+        	
+        	<div id="billTabContent" class="row">
+        		<div id="tab1">
+        			Tabs tabs tabs tabs
+        		</div>
+        		
+        		<div id="tab2">
+        			This tab was selected by default due having the "selected" class on the tab. <br/> <br/>
+        			
+        			<div id="clickToGoToSlide3">Clicking this text will select the third tab, which has qUnit testing.</div>
+        		</div>
+        		
+        		<div id="tab3">
+					<h1 id="qunit-header">QUnit example</h1>
+					<h2 id="qunit-banner"></h2>
+					<div id="qunit-testrunner-toolbar"></div>
+					<h2 id="qunit-userAgent"></h2>
+					<ol id="qunit-tests"></ol>
+					<div id="qunit-fixture">test markup, will be hidden</div>
+        		</div>
+        	</div> <!-- #billTabContent .row -->
+        	
+        </div> <!-- #main .container -->
+        
+        
+    </body>
+</html>
